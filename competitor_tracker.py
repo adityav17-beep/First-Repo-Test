@@ -184,7 +184,7 @@ def snapshot_path(name: str) -> Path:
     return SNAPSHOT_DIR / f"{safe}.json"
 
 
-def load_previous_snapshot(name: str) -> dict | None:
+def load_previous_snapshot(name: str) -> "dict | None":
     path = snapshot_path(name)
     return json.loads(path.read_text()) if path.exists() else None
 
@@ -253,7 +253,7 @@ def generate_report(
     client: anthropic.Anthropic,
     name: str,
     current: dict,
-    previous: dict | None,
+    previous: "dict | None",
 ) -> str:
     """Ask Claude to write the 1-page brief from the scraped data."""
     prev_label = previous.get("scraped_at", "")[:10] if previous else "no previous snapshot"
