@@ -295,9 +295,12 @@ def process_competitor(client: anthropic.Anthropic, name: str, url: str) -> None
     print(" done.")
 
     if current.get("parse_error"):
-        print("  Warning: could not parse structured data from this site.")
-        print(f"  Raw snapshot saved to {snapshot_path(name)}")
-        return
+        print("  Warning: could not parse structured data — using raw response.")
+        # Replace with a minimal structured dict so report generation still works
+        current = {
+            "company_name": name,
+            "raw_text": current.get("raw_response", "No content captured."),
+        }
 
     print("  Step 2/2  Writing 1-page brief ...", end="", flush=True)
     report = generate_report(client, name, current, previous)
