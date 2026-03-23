@@ -37,9 +37,7 @@ COMPETITORS_FILE = Path("competitors.json")
 SCRAPE_PROMPT = """You are a competitive intelligence analyst specialising in
 decision intelligence, agentic AI, and enterprise automation.
 
-Visit the URL below and dig into its website — homepage, navigation, products /
-solutions pages, AI or platform pages, blog / newsroom, and any 'What's New'
-sections you can reach.
+Visit the URL below and parse the homepage only. Do not follow any links or navigate to other pages.
 
 URL: {url}
 
